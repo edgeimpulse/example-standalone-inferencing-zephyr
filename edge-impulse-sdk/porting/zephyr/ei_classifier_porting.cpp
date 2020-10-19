@@ -23,7 +23,7 @@
 #include <zephyr.h>
 #include <stdio.h>
 #include <sys/printk.h>
-#include "../ei_classifier_porting.h"
+#include "ei_classifier_porting.h"
 
 #define EI_WEAK_FN __attribute__((weak))
 
