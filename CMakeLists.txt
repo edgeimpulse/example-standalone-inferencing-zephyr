@@ -46,7 +46,7 @@ INCLUDE_DIRECTORIES(
 	edge-impulse-sdk/tensorflow/core
 	edge-impulse-sdk/tensorflow
 	edge-impulse-sdk/porting
-	#edge-impulse-sdk/porting/zephyr
+	edge-impulse-sdk/porting/zephyr
 	edge-impulse-sdk/dsp/speechpy
 	edge-impulse-sdk/dsp/spectral
 	edge-impulse-sdk/dsp/kissfft
@@ -574,8 +574,8 @@ ADD_EXECUTABLE(example-standalone-inferencing-nrf52-zephyr
 	edge-impulse-sdk/dsp/speechpy/processing.hpp
 	edge-impulse-sdk/dsp/speechpy/speechpy.hpp
 	edge-impulse-sdk/porting/ei_classifier_porting.h
-	#edge-impulse-sdk/porting/zephyr/debug_log.cpp
-	#edge-impulse-sdk/porting/zephyr/ei_classifier_porting.cpp
+	edge-impulse-sdk/porting/zephyr/debug_log.cpp
+	edge-impulse-sdk/porting/zephyr/ei_classifier_porting.cpp
 	edge-impulse-sdk/tensorflow/core/public/version.h
 	edge-impulse-sdk/tensorflow/lite/c/builtin_op_data.h
 	edge-impulse-sdk/tensorflow/lite/c/common.c
@@ -777,7 +777,7 @@ add syslibs dependencies to create the correct linker order
 TARGET_LINK_LIBRARIES(example-standalone-inferencing-nrf52-zephyr -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys)
 	
 # set(CODAL_APP_SOURCE_DIR "source")
-# add_subdirectory(source/porting/zephyr)
+add_subdirectory(source/porting/zephyr)
 
 # MACRO(RECURSIVE_FIND_DIR return_list dir pattern)
 #     FILE(GLOB_RECURSE new_list "${dir}/${pattern}")
