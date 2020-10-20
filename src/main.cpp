@@ -40,7 +40,7 @@ int main() {
         // print the predictions
         printk("[");
         for (size_t ix = 0; ix < EI_CLASSIFIER_LABEL_COUNT; ix++) {
-            printk("%.5f", result.classification[ix].value);
+            ei_printf_float(result.classification[ix].value);
 #if EI_CLASSIFIER_HAS_ANOMALY == 1
             printk(", ");
 #else
@@ -50,9 +50,10 @@ int main() {
 #endif
         }
 #if EI_CLASSIFIER_HAS_ANOMALY == 1
-        printk("%.3f", result.anomaly);
+        ei_printf_float(result.anomaly);
 #endif
-        printk("]\n");
+        printk("]");
+        ei_printf("\n");
 
         k_msleep(2000);
     }

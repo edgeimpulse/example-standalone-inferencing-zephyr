@@ -56,7 +56,12 @@ __attribute__((weak)) void ei_printf(const char *format, ...) {
     va_end(args);
 
     if (r > 0) {
+        if (print_buf[0] == '\n') {
+            printf("\n");
+        }
+        else {
         printk("%s", print_buf);
+        }
     }
 }
 
