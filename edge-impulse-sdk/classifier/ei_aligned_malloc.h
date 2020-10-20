@@ -27,6 +27,8 @@
 namespace {
 #endif // __cplusplus
 
+#include <assert.h>
+
 /**
 * Based on https://github.com/embeddedartistry/embedded-resources/blob/master/examples/c/malloc_aligned.c
 */

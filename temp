@@ -1,3 +1,83 @@
+# SPDX-License-Identifier: Apache-2.0
+cmake_minimum_required(VERSION 3.13.1)
+
+# Needed for colorful output
+zephyr_compile_options(-fdiagnostics-color=always)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CONFIG_LIB_CPLUSPLUS ON)
+set(CONFIG_NEWLIB_LIBC ON)
+find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
+project(blinky)
+include(utils/cmake/utils.cmake)
+add_definitions(-DEIDSP_USE_CMSIS_DSP=1 
+                -DEIDSP_QUANTIZE_FILTERBANK=1 
+                -DARM_MATH_LOOPUNROLL 
+                -DEIDSP_PRINT_ALLOCATIONS=0 
+                -DEIDSP_TRACK_ALLOCATIONS=1 
+                -DEIDSP_USE_ASSERTS=0)
+
+# Add all include paths
+set(INCLUDES 
+    .
+    src
+	tflite-model
+	model-parameters
+	edge-impulse-sdk
+	edge-impulse-sdk/third_party/ruy
+	edge-impulse-sdk/third_party/gemmlowp
+	edge-impulse-sdk/third_party/flatbuffers/include
+	edge-impulse-sdk/third_party
+	edge-impulse-sdk/tensorflow/lite/schema
+	# edge-impulse-sdk/tensorflow/lite/micro/testing
+	edge-impulse-sdk/tensorflow
+	edge-impulse-sdk/porting
+	#edge-impulse-sdk/porting/zephyr
+	edge-impulse-sdk/dsp/speechpy
+	edge-impulse-sdk/dsp/spectral
+	edge-impulse-sdk/dsp/kissfft
+	edge-impulse-sdk/dsp/dct
+	edge-impulse-sdk/dsp
+	edge-impulse-sdk/classifier
+	edge-impulse-sdk/anomaly
+	edge-impulse-sdk/CMSIS/NN/Include
+	edge-impulse-sdk/CMSIS/DSP/PrivateInclude
+	edge-impulse-sdk/CMSIS/DSP/Include
+	edge-impulse-sdk/CMSIS/Core/Include
+	)
+
+RECURSIVE_FIND_FILE(SOURCE_FILES "src/edge-impulse-sdk" "*.cpp")
+RECURSIVE_FIND_FILE(CC_FILES "src/edge-impulse-sdk" "*.cc")
+RECURSIVE_FIND_FILE(S_FILES "src/edge-impulse-sdk" "*.s")
+RECURSIVE_FIND_FILE(C_FILES "src/edge-impulse-sdk" "*.c")
+
+list(APPEND SOURCE_FILES ${S_FILES})
+list(APPEND SOURCE_FILES ${C_FILES})
+list(APPEND SOURCE_FILES ${CC_FILES})
+
+set(EXCLUDE_DIR "/edge-impulse-sdk/porting/")
+
+foreach (TMP_PATH ${SOURCE_FILES})
+    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+        list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
+    endif ()
+endforeach(TMP_PATH)
+set(EXCLUDE_DIR "ei_run_classifier_c")
+foreach (TMP_PATH ${SOURCE_FILES})
+    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+        list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
+    endif ()
+endforeach(TMP_PATH)
+
+include_directories(${INCLUDES})
+target_sources(app PRIVATE src/main.cpp)
+#target_sources(app PRIVATE src/ei_classifier_porting.cpp)
+target_sources(app PRIVATE ${SOURCE_FILES})
+
+
 cmake_minimum_required(VERSION 3.13.1)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -14,10 +94,14 @@ add_definitions(-DEIDSP_USE_CMSIS_DSP=1
                 -DARM_MATH_LOOPUNROLL 
                 -DEIDSP_PRINT_ALLOCATIONS=0 
                 -DEIDSP_TRACK_ALLOCATIONS=1 
-                -DEIDSP_USE_ASSERTS=1)
+                -DEIDSP_USE_ASSERTS=0)
 
 # Needed for colorful output
 zephyr_compile_options(-fdiagnostics-color=always)
+
+#zephyr_include_directories(dir_a)
+#include_directories(${CMAKE_SOURCE_DIR}/dir_a)
+#target_include_directories(app PRIVATE dir_a)
 
 # Add all include paths
 set(INCLUDES 
