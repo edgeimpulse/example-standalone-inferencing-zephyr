@@ -13,7 +13,7 @@ add_definitions(-DEIDSP_USE_CMSIS_DSP=1
                 -DEIDSP_QUANTIZE_FILTERBANK=1 
                 -DARM_MATH_LOOPUNROLL 
                 -DEIDSP_PRINT_ALLOCATIONS=0 
-                -DEIDSP_TRACK_ALLOCATIONS=1 
+                -DEIDSP_TRACK_ALLOCATIONS=0 
                 -DEIDSP_USE_ASSERTS=1)
 
 # Needed for colorful output
@@ -34,7 +34,7 @@ set(INCLUDES
 	# edge-impulse-sdk/tensorflow/lite/micro/testing
 	edge-impulse-sdk/tensorflow
 	edge-impulse-sdk/porting
-	#edge-impulse-sdk/porting/zephyr
+	edge-impulse-sdk/porting/zephyr
 	edge-impulse-sdk/dsp/speechpy
 	edge-impulse-sdk/dsp/spectral
 	edge-impulse-sdk/dsp/kissfft
@@ -483,8 +483,8 @@ set(SOURCES
 	edge-impulse-sdk/dsp/kissfft/kiss_fft.cpp
 	edge-impulse-sdk/dsp/kissfft/kiss_fftr.cpp
 	edge-impulse-sdk/dsp/memory.cpp
-	# edge-impulse-sdk/porting/zephyr/debug_log.cpp
-	# edge-impulse-sdk/porting/zephyr/ei_classifier_porting.cpp
+	edge-impulse-sdk/porting/zephyr/debug_log.cpp
+	edge-impulse-sdk/porting/zephyr/ei_classifier_porting.cpp
 	edge-impulse-sdk/tensorflow/lite/c/common.c
 	edge-impulse-sdk/tensorflow/lite/core/api/error_reporter.cc
 	edge-impulse-sdk/tensorflow/lite/core/api/flatbuffer_conversions.cc
