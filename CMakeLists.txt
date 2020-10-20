@@ -9,15 +9,18 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
 project(example-standalone-inferencing-nrf52-zephyr)
 
-add_definitions(-DEIDSP_USE_CMSIS_DSP=1 
+add_definitions(-DEIDSP_USE_CMSIS_DSP=1
                 -DEIDSP_QUANTIZE_FILTERBANK=1 
                 -DARM_MATH_LOOPUNROLL 
                 -DEIDSP_PRINT_ALLOCATIONS=0 
                 -DEIDSP_TRACK_ALLOCATIONS=0 
                 -DEIDSP_USE_ASSERTS=1)
 
+
 # Needed for colorful output
 zephyr_compile_options(-fdiagnostics-color=always)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Add all include paths
 set(INCLUDES 
