@@ -12,7 +12,7 @@ int raw_feature_get_data(size_t offset, size_t length, float *out_ptr) {
 }
 
 int main() {
-    // This is needed so that output of printf is output immediately 
+    // This is needed so that output of printf is output immediately without buffering
     setvbuf(stdout, NULL, _IONBF, 0);
 
     printk("Edge Impulse standalone inferencing (Zephyr)\n");
