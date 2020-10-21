@@ -22,8 +22,7 @@
 
 #include <zephyr.h>
 #include <stdio.h>
-#include <sys/printk.h>
-#include "../ei_classifier_porting.h"
+#include "ei_classifier_porting.h"
 
 #define EI_WEAK_FN __attribute__((weak))
 
@@ -56,7 +55,7 @@ __attribute__((weak)) void ei_printf(const char *format, ...) {
     va_end(args);
 
     if (r > 0) {
-        printk("%s", print_buf);
+        printf("%s", print_buf);
     }
 }
 
@@ -68,6 +67,6 @@ __attribute__((weak)) void ei_printf_float(float f) {
 extern "C"
 #endif
 __attribute__((weak)) void DebugLog(const char* s) {
-    printk("%s", s);
+    printf("%s", s);
 }
 

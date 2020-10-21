@@ -24,6 +24,7 @@
 #define _EIDSP_MEMORY_H_
 
 #include <stdlib.h>
+#include <stdio.h>
 
 extern size_t ei_memory_in_use;
 extern size_t ei_memory_peak_use;

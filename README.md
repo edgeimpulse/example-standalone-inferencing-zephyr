@@ -1,8 +1,12 @@
 # example standalone inferencing nrf52 zephyr
-This runs an exported impulse on any Mbed-enabled development board. 
+This runs an exported impulse on Nordic Semi Zephyr enabled development board. 
 
 ## Overview
 
+Working on boards:
+* nrf52dk_nrf52832
+* nrf52840dk_nrf52840
+* nrf9160dk_nrf9160
 
 
 ## Building and Running
