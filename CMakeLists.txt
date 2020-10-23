@@ -59,6 +59,7 @@ list(APPEND SOURCE_FILES ${CC_FILES})
 list(APPEND SOURCE_FILES ${PORTING_FILES})
 list(APPEND SOURCE_FILES ${MODEL_FILES})
 
+# remove edge-impulse-sdk/porting files from project
 set(EXCLUDE_DIR "/edge-impulse-sdk/porting/")
 foreach (TMP_PATH ${SOURCE_FILES})
     string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
@@ -67,6 +68,7 @@ foreach (TMP_PATH ${SOURCE_FILES})
     endif ()
 endforeach(TMP_PATH)
 
+# remove edge-impulse-sdk/ei_run_classifier_c files from project
 set(EXCLUDE_DIR "ei_run_classifier_c")
 foreach (TMP_PATH ${SOURCE_FILES})
     string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
@@ -75,6 +77,7 @@ foreach (TMP_PATH ${SOURCE_FILES})
     endif ()
 endforeach(TMP_PATH)
 
+# remove edge-impulse-sdk/utensor files from project
 set(EXCLUDE_DIR "/edge-impulse-sdk/utensor")
 foreach (TMP_PATH ${SOURCE_FILES})
     string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
@@ -87,5 +90,7 @@ endforeach(TMP_PATH)
 # additional CMake file in porting folder
 add_subdirectory(src/porting/zephyr)
 
-target_sources(app PRIVATE src/main.cpp)
+# add all sources to the project
 target_sources(app PRIVATE ${SOURCE_FILES})
+target_sources(app PRIVATE src/main.cpp)
+
