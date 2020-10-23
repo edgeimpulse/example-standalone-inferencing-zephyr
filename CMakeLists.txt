@@ -60,7 +60,7 @@ foreach (TMP_PATH ${SOURCE_FILES})
 endforeach(TMP_PATH)
 
 target_sources(app PRIVATE src/main.cpp)
-target_sources(app PRIVATE src/ei_classifier_porting.cpp)
+target_sources(app PRIVATE src/porting/ei_classifier_porting.cpp)
 target_sources(app PRIVATE ${SOURCE_FILES})
 # # Add all include paths
 # set(INCLUDES 
