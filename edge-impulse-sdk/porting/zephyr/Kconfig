@@ -1,6 +1,0 @@
-config NEWLIB_LIBC_FLOAT_PRINTF
-    bool "Build with newlib float printf"
-    depends on NEWLIB_LIBC
-    help
-      Build with floating point printf enabled. This will increase the size of
-      the image.
