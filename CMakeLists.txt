@@ -13,8 +13,6 @@ include(utils/cmake/utils.cmake)
 # Needed for colorful output
 zephyr_compile_options(-fdiagnostics-color=always)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 add_definitions(-DEIDSP_USE_CMSIS_DSP=1
                 -DEIDSP_QUANTIZE_FILTERBANK=1 
                 -DARM_MATH_LOOPUNROLL 
@@ -22,26 +20,67 @@ add_definitions(-DEIDSP_USE_CMSIS_DSP=1
                 -DEIDSP_TRACK_ALLOCATIONS=0 
 				-DEIDSP_USE_ASSERTS=1)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Edge impulse SDK include directories
-include_directories(app src/)
-include_directories(app src/edge-impulse-sdk)
-include_directories(app src/edge-impulse-sdk/classifier)
-include_directories(app src/edge-impulse-sdk/dsp)
-include_directories(app src/edge-impulse-sdk/third_party/flatbuffers/include)
-include_directories(app src/edge-impulse-sdk/third_party/gemmlowp)
-include_directories(app src/edge-impulse-sdk/third_party/ruy)
-include_directories(app src/edge-impulse-sdk/CMSIS/Core/Include/)
-include_directories(app src/edge-impulse-sdk/CMSIS/DSP/Include/)
-include_directories(app src/edge-impulse-sdk/CMSIS/DSP/PrivateInclude/)
-include_directories(app src/edge-impulse-sdk/CMSIS/NN/Include/)
+# include_directories(app src/)
+# include_directories(app src/model-parameters)
+# include_directories(app src/tflite-model)
+# include_directories(app src/porting)
+# include_directories(app src/porting/zephyr)
+# include_directories(app src/edge-impulse-sdk)
+# include_directories(app src/edge-impulse-sdk/classifier)
+# include_directories(app src/edge-impulse-sdk/dsp)
+# include_directories(app src/edge-impulse-sdk/third_party/flatbuffers/include)
+# include_directories(app src/edge-impulse-sdk/third_party/gemmlowp)
+# include_directories(app src/edge-impulse-sdk/third_party/ruy)
+# include_directories(app src/edge-impulse-sdk/CMSIS/Core/Include/)
+# include_directories(app src/edge-impulse-sdk/CMSIS/DSP/Include/)
+# include_directories(app src/edge-impulse-sdk/CMSIS/DSP/PrivateInclude/)
+# include_directories(app src/edge-impulse-sdk/CMSIS/NN/Include/)
+
+# Add all include paths
+set(INCLUDES 
+    .
+    src
+	src/tflite-model
+	src/model-parameters
+	src/porting
+	# src/porting/zephyr
+	src/edge-impulse-sdk
+	src/edge-impulse-sdk/third_party/ruy
+	src/edge-impulse-sdk/third_party/gemmlowp
+	src/edge-impulse-sdk/third_party/flatbuffers/include
+	src/edge-impulse-sdk/third_party
+	src/edge-impulse-sdk/tensorflow/lite/schema
+	# src/edge-impulse-sdk/tensorflow/lite/micro/testing
+	src/edge-impulse-sdk/tensorflow
+	# src/edge-impulse-sdk/porting
+	# src/edge-impulse-sdk/porting/zephyr
+	src/edge-impulse-sdk/dsp/speechpy
+	src/edge-impulse-sdk/dsp/spectral
+	src/edge-impulse-sdk/dsp/kissfft
+	src/edge-impulse-sdk/dsp/dct
+	src/edge-impulse-sdk/dsp
+	src/edge-impulse-sdk/classifier
+	src/edge-impulse-sdk/anomaly
+	src/edge-impulse-sdk/CMSIS/NN/Include
+	src/edge-impulse-sdk/CMSIS/DSP/PrivateInclude
+	src/edge-impulse-sdk/CMSIS/DSP/Include
+	src/edge-impulse-sdk/CMSIS/Core/Include
+	)
 
 RECURSIVE_FIND_FILE(SOURCE_FILES "src/edge-impulse-sdk" "*.cpp")
+RECURSIVE_FIND_FILE(SOURCE_FILES_1 "src/porting/zephyr" "*.cpp")
+RECURSIVE_FIND_FILE(SOURCE_FILES_2 "src/tflite-model" "*.cpp")
 RECURSIVE_FIND_FILE(CC_FILES "src/edge-impulse-sdk" "*.cc")
 RECURSIVE_FIND_FILE(S_FILES "src/edge-impulse-sdk" "*.s")
 RECURSIVE_FIND_FILE(C_FILES "src/edge-impulse-sdk" "*.c")
 list(APPEND SOURCE_FILES ${S_FILES})
 list(APPEND SOURCE_FILES ${C_FILES})
 list(APPEND SOURCE_FILES ${CC_FILES})
+list(APPEND SOURCE_FILES ${SOURCE_FILES_1})
+list(APPEND SOURCE_FILES ${SOURCE_FILES_2})
 
 set(EXCLUDE_DIR "/edge-impulse-sdk/porting/")
 foreach (TMP_PATH ${SOURCE_FILES})
@@ -58,9 +97,33 @@ foreach (TMP_PATH ${SOURCE_FILES})
         list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
     endif ()
 endforeach(TMP_PATH)
+#ist(REMOVE_ITEM SOURCE_FILES "edge-impulse-sdk/classifier/ei_run_classifier_c.cpp")
 
+set(EXCLUDE_DIR "/edge-impulse-sdk/utensor")
+foreach (TMP_PATH ${SOURCE_FILES})
+    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+        list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
+    endif ()
+endforeach(TMP_PATH)
+
+# set(EXCLUDE_DIR "/edge-impulse-sdk/tensorflow/lite/micro/testing")
+# foreach (TMP_PATH ${SOURCE_FILES})
+#     string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+#     if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+#         list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
+#     endif ()
+# endforeach(TMP_PATH)
+
+#list(REMOVE_ITEM SOURCE_FILES "edge-impulse-sdk/tensorflow/lite/micro/test_helpers.cc")
+#list(REMOVE_ITEM SOURCE_FILES "edge-impulse-sdk/tensorflow/lite/micro/test_helpers.h")
+
+# Include source directory
+#zephyr_include_directories(src)
+
+add_subdirectory(src/porting/zephyr)
+include_directories(${INCLUDES})
 target_sources(app PRIVATE src/main.cpp)
-target_sources(app PRIVATE src/porting/ei_classifier_porting.cpp)
 target_sources(app PRIVATE ${SOURCE_FILES})
 # # Add all include paths
 # set(INCLUDES 
