@@ -1,3 +1,7 @@
 build/*
 .vscode/*
 tags
+#comment if you want to commit your model
+edge-impulse-sdk/*
+model-parameters/*
+tflite-model/*
