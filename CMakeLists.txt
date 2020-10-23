@@ -22,37 +22,37 @@ add_definitions(-DEIDSP_USE_CMSIS_DSP=1
 set(INCLUDES 
     .
     src
-	src/tflite-model
-	src/model-parameters
-	src/porting
-	src/edge-impulse-sdk
-	src/edge-impulse-sdk/third_party/ruy
-	src/edge-impulse-sdk/third_party/gemmlowp
-	src/edge-impulse-sdk/third_party/flatbuffers/include
-	src/edge-impulse-sdk/third_party
-	src/edge-impulse-sdk/tensorflow/lite/schema
-	src/edge-impulse-sdk/tensorflow/lite/micro/testing
-	src/edge-impulse-sdk/tensorflow
-	src/edge-impulse-sdk/dsp/speechpy
-	src/edge-impulse-sdk/dsp/spectral
-	src/edge-impulse-sdk/dsp/kissfft
-	src/edge-impulse-sdk/dsp/dct
-	src/edge-impulse-sdk/dsp
-	src/edge-impulse-sdk/classifier
-	src/edge-impulse-sdk/anomaly
-	src/edge-impulse-sdk/CMSIS/NN/Include
-	src/edge-impulse-sdk/CMSIS/DSP/PrivateInclude
-	src/edge-impulse-sdk/CMSIS/DSP/Include
-	src/edge-impulse-sdk/CMSIS/Core/Include
+	tflite-model
+	model-parameters
+	porting
+	edge-impulse-sdk
+	edge-impulse-sdk/third_party/ruy
+	edge-impulse-sdk/third_party/gemmlowp
+	edge-impulse-sdk/third_party/flatbuffers/include
+	edge-impulse-sdk/third_party
+	edge-impulse-sdk/tensorflow/lite/schema
+	edge-impulse-sdk/tensorflow/lite/micro/testing
+	edge-impulse-sdk/tensorflow
+	edge-impulse-sdk/dsp/speechpy
+	edge-impulse-sdk/dsp/spectral
+	edge-impulse-sdk/dsp/kissfft
+	edge-impulse-sdk/dsp/dct
+	edge-impulse-sdk/dsp
+	edge-impulse-sdk/classifier
+	edge-impulse-sdk/anomaly
+	edge-impulse-sdk/CMSIS/NN/Include
+	edge-impulse-sdk/CMSIS/DSP/PrivateInclude
+	edge-impulse-sdk/CMSIS/DSP/Include
+	edge-impulse-sdk/CMSIS/Core/Include
 	)
 include_directories(${INCLUDES})
 
-RECURSIVE_FIND_FILE(SOURCE_FILES "src/edge-impulse-sdk" "*.cpp")
-RECURSIVE_FIND_FILE(PORTING_FILES "src/porting/zephyr" "*.cpp")
-RECURSIVE_FIND_FILE(MODEL_FILES "src/tflite-model" "*.cpp")
-RECURSIVE_FIND_FILE(CC_FILES "src/edge-impulse-sdk" "*.cc")
-RECURSIVE_FIND_FILE(S_FILES "src/edge-impulse-sdk" "*.s")
-RECURSIVE_FIND_FILE(C_FILES "src/edge-impulse-sdk" "*.c")
+RECURSIVE_FIND_FILE(SOURCE_FILES "edge-impulse-sdk" "*.cpp")
+RECURSIVE_FIND_FILE(PORTING_FILES "porting/zephyr" "*.cpp")
+RECURSIVE_FIND_FILE(MODEL_FILES "tflite-model" "*.cpp")
+RECURSIVE_FIND_FILE(CC_FILES "edge-impulse-sdk" "*.cc")
+RECURSIVE_FIND_FILE(S_FILES "edge-impulse-sdk" "*.s")
+RECURSIVE_FIND_FILE(C_FILES "edge-impulse-sdk" "*.c")
 list(APPEND SOURCE_FILES ${S_FILES})
 list(APPEND SOURCE_FILES ${C_FILES})
 list(APPEND SOURCE_FILES ${CC_FILES})
@@ -88,7 +88,7 @@ endforeach(TMP_PATH)
 
 # add porting files for zephyr
 # additional CMake file in porting folder
-add_subdirectory(src/porting/zephyr)
+add_subdirectory(porting/zephyr)
 
 # add all sources to the project
 target_sources(app PRIVATE ${SOURCE_FILES})
