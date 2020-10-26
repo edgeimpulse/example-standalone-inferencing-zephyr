@@ -1,7 +1,7 @@
 sample:
-  description: Hello World sample, the simplest Zephyr
+  description: example-standalone-inferencing-nrf52-zephyr sample, the simplest Edge Impulse sample for Zephyr
     application
-  name: hello world
+  name: example-standalone-inferencing-nrf52-zephyr
 common:
     tags: introduction
     harness: console
