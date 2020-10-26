@@ -42,18 +42,16 @@ Download the `.zip` file and place the contents in the 'example-standalone-infer
 With the project ready it's time to verify that the application works. Head back to the studio and click on **Live classification**. Then load a validation sample, and click on a row under 'Detailed result'.
 
 <p align="center">
-  <img src="img1.png" alt="Selecting the row with timestamp '320' under 'Detailed result'"/>
+  <img src="img1.png" alt="Selecting the row with timestamp '320' under 'Detailed result'"><br><br>
+  <i>Selecting the row with timestamp '320' under 'Detailed result'</i><br>
 </p>
-
-<center><i>Selecting the row with timestamp '320' under 'Detailed result'</i></center><br/>
 
 To verify that the local application classifies the same, we need the raw features for this timestamp. To do so click on the 'Copy to clipboard' button next to 'Raw features'. This will copy the raw values from this validation file, before any signal processing or inferencing happened.
 
 <p align="center">
-  <img src="img2.png" alt="Copying the raw features"/>
+  <img src="img2.png" alt="Copying the raw features"><br><br>
+  <i>Copying the raw features</i><br>
 </p>
-
-<center><i>Copying the raw features</i></center><br/>
 
 In the example directory open `src/main.cpp` and paste the raw features inside the `static const float features[]` definition, for example:
 ```c
