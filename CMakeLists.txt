@@ -12,16 +12,16 @@ include(utils/cmake/utils.cmake)
 zephyr_compile_options(-fdiagnostics-color=always)
 
 add_definitions(-DEIDSP_USE_CMSIS_DSP=1
-                -DEIDSP_QUANTIZE_FILTERBANK=1 
-                -DARM_MATH_LOOPUNROLL 
-                -DEIDSP_PRINT_ALLOCATIONS=0 
-                -DEIDSP_TRACK_ALLOCATIONS=0 
+				-DEIDSP_QUANTIZE_FILTERBANK=1 
+				-DARM_MATH_LOOPUNROLL 
+				-DEIDSP_PRINT_ALLOCATIONS=0 
+				-DEIDSP_TRACK_ALLOCATIONS=0 
 				-DEIDSP_USE_ASSERTS=1)
 
 # Edge impulse SDK include directories
 set(INCLUDES 
-    .
-    src
+	.
+	src
 	tflite-model
 	model-parameters
 	porting
@@ -62,28 +62,28 @@ list(APPEND SOURCE_FILES ${MODEL_FILES})
 # remove edge-impulse-sdk/porting files from project
 set(EXCLUDE_DIR "/edge-impulse-sdk/porting/")
 foreach (TMP_PATH ${SOURCE_FILES})
-    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
-    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
-        list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
-    endif ()
+	string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+	if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+		list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
+	endif ()
 endforeach(TMP_PATH)
 
 # remove edge-impulse-sdk/ei_run_classifier_c files from project
 set(EXCLUDE_DIR "ei_run_classifier_c")
 foreach (TMP_PATH ${SOURCE_FILES})
-    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
-    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
-        list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
-    endif ()
+	string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+	if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+		list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
+	endif ()
 endforeach(TMP_PATH)
 
 # remove edge-impulse-sdk/utensor files from project
 set(EXCLUDE_DIR "/edge-impulse-sdk/utensor")
 foreach (TMP_PATH ${SOURCE_FILES})
-    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
-    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
-        list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
-    endif ()
+	string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+	if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+		list (REMOVE_ITEM SOURCE_FILES ${TMP_PATH})
+	endif ()
 endforeach(TMP_PATH)
 
 # add porting files for zephyr
