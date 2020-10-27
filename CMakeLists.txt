@@ -16,7 +16,8 @@ add_definitions(-DEIDSP_USE_CMSIS_DSP=1
 				-DARM_MATH_LOOPUNROLL 
 				-DEIDSP_PRINT_ALLOCATIONS=0 
 				-DEIDSP_TRACK_ALLOCATIONS=0 
-				-DEIDSP_USE_ASSERTS=1)
+				-DEIDSP_USE_ASSERTS=1
+				)
 
 # Edge impulse SDK include directories
 set(INCLUDES 
