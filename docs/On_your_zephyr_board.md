@@ -97,10 +97,15 @@ Which matches the values we just saw in the studio. You now have your impulse ru
 
 ### Invalid choice: 'build'
 
+Example:
+```bash
+$ west build -b nrf52840dk_nrf52840
+usage: west [-h] [-z ZEPHYR_BASE] [-v] [-V] <command> ...
+west: error: argument <command>: invalid choice: 'build' (choose from 'init', 'update', 'list', 'manifest', 'diff', 'status', 'forall', 'help', 'config', 'topdir', 'selfupdate')
+```
+
 This error happens when we are trying to build the example project outside of installed `ncs/zephyr` directory and we did not set environment variables.
 To solve this problem we can either move the example project inside `ncs/zephyr/samples` directory and build it from there or we can set required environment variables as seen in Nordic's [documentation][zephyr_env_docs].
-
-If you stumble upon any Zephyr build errors, which 
 
 [nrf52840dk_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/zephyr/boards/arm/nrf52840dk_nrf52840/doc/index.html
 [ncs_130_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/nrf/index.html
