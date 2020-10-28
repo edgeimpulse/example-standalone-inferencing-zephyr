@@ -12,7 +12,7 @@ Make sure you followed the Continuous motion recognition tutorial, and have a tr
 * [install Segger J-Link tools][jlink_tools] for firmware flashing. 
 
 ## Cloning the base repository
-We created an example repository which contains a small application, which takes the raw features as an argument, and prints out the final classification. You can either[download the application][app_gh_download] or import this repository using Git:
+We created an example repository which contains a small application, which takes the raw features as an argument, and prints out the final classification. You can either [download the application][app_gh_download] or import this repository using Git:
 
 ```bash
 git clone https://github.com/edgeimpulse/example-standalone-inferencing-nrf52-zephyr.git
@@ -78,16 +78,17 @@ This will run the signal processing pipeline, and then classify the output:
 ```
 *** Booting Zephyr OS build v2.3.0-rc1-ncs1  ***
 Edge Impulse standalone inferencing (Zephyr)
-Features (14 ms.): 1.573805 0.496032 2.039807 1.984127 0.366190 2.976190 0.214352 0.435654 0.017216 0.013104 0.001996 5.901122 0.496032 6.714868 5.456349 0.126 
+Features (14 ms.): 1.531785 0.992063 1.732565 1.984127 0.509300 2.976190 0.282135 0.079512 0.308956 0.015747 0.003525 0.997847 2.480159 0.892365 0.992063 0.582132 0.000000 0.000000 0.009061 0.034836 0.020850 0.019193 7.826533 0.992063 9.8 
 Running neural network...
 Predictions (time: 0 ms.):
 idle:   0.000000
 snake:  0.000000
 updown: 0.996094
-wave:   0.003906
+wave:   0.000000
+Anomaly score (time: 1 ms.): -0.050449
 run_classifier returned: 0
-Predictions (DSP: 14 ms., Classification: 0 ms., Anomaly: 0 ms.): 
-[0.000000, 0.000000, 0.996094, 0.003906]
+Predictions (DSP: 14 ms., Classification: 0 ms., Anomaly: 1 ms.): 
+[0.000000, 0.000000, 0.996094, 0.000000, -0.050449]
 ```
 
 Which matches the values we just saw in the studio. You now have your impulse running on your nRF52840DK Zephyr RTOS enabled development board!
