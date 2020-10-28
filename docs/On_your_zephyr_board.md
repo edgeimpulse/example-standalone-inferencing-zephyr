@@ -3,16 +3,16 @@
 Impulses can be deployed as a C++ library. This packages all your signal processing blocks, configuration and learning blocks up into a single package. You can include this package in your own application to run the impulse locally. In this tutorial you'll export an impulse, and build an application for the nRF52840DK board running Zephyr RTOS to classify sensor data.
 
 > **Knowledge required**  
-> This tutorial assumes that you're familiar with building applications for the [nRF52840DK](nrf52840dk_docs) or other **Zephyr RTOS** supported board, and have your environment set up to compile applications for this platform. Currently application is optimized for [NRF Connect SDK v1.3.0](ncs_130_docs) which uses [Zephyr RTOS v2.3.0-rc1](zephyr_230_docs)
+> This tutorial assumes that you're familiar with building applications for the [nRF52840DK][nrf52840dk_docs] or other **Zephyr RTOS** supported board, and have your environment set up to compile applications for this platform. Currently application is optimized for [NRF Connect SDK v1.3.0][ncs_130_docs] which uses [Zephyr RTOS v2.3.0-rc1][zephyr_230_docs]
 
 ## Prerequisites
 
 Make sure you followed the Continuous motion recognition tutorial, and have a trained impulse. If the build system is not in place you should follow these guides:
-* [install NRF Connect SDK](ncs_install) - this will install Zephyr and all dependencies
-* [install Segger J-Link tools](jlink_tools) for firmware flashing. 
+* [install NRF Connect SDK][ncs_install] - this will install Zephyr and all dependencies
+* [install Segger J-Link tools][jlink_tools] for firmware flashing. 
 
 ## Cloning the base repository
-We created an example repository which contains a small application, which takes the raw features as an argument, and prints out the final classification. You can either[download the application](app_gh_download) or import this repository using Git:
+We created an example repository which contains a small application, which takes the raw features as an argument, and prints out the final classification. You can either[download the application][app_gh_download] or import this repository using Git:
 
 ```bash
 git clone https://github.com/edgeimpulse/example-standalone-inferencing-nrf52-zephyr.git
@@ -64,10 +64,10 @@ Then build the application by opening a terminal or command prompt, navigating t
 $ west build -b nrf52840dk_nrf52840
 ```
 
-This generates binary files in the build/ directory that can be flashed on the [nRF52840DK](nrf52840dk_docs) using onboard a J-LINK.
+This generates binary files in the build/ directory that can be flashed on the [nRF52840DK][nrf52840dk_docs] using onboard a J-LINK.
 
 #### Flashing using a *west* and J-LINK
-Connect your board, usually via USB, and turn it on if there’s a power switch.Then flash the sample using [west flash](west_flash):
+Connect your board, usually via USB, and turn it on if there’s a power switch.Then flash the sample using [west flash][west_flash]:
 ```bash
 $ west flash
 ```
