@@ -101,6 +101,7 @@ This error happens when we are trying to build the example project outside of in
 To solve this problem we can either move the example project inside `ncs/zephyr/samples` directory and build it from there or we can set required environment variables as seen in Nordic's [documentation][zephyr_env_docs].
 
 If you stumble upon any Zephyr build errors, which 
+
 [nrf52840dk_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/zephyr/boards/arm/nrf52840dk_nrf52840/doc/index.html
 [ncs_130_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/nrf/index.html
 [zephyr_230_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/zephyr/index.html
