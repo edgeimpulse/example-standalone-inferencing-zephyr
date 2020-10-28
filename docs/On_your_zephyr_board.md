@@ -56,7 +56,7 @@ To verify that the local application classifies the same, we need the raw featur
 In the example directory open `src/main.cpp` and paste the raw features inside the `static const float features[]` definition, for example:
 ```c
 static const float features[] = {
-    -19.8800, -0.6900, 8.2300, -17.6600, -1.1300, 5.9700, ...
+    3.9500, 2.0900, 17.2600, 3.2400, 0.7600, 17.6000 ...
 };
 ```
 Then build the application by opening a terminal or command prompt, navigating to the 'example-standalone-inferencing-nrf52-zephyr' folder and run:
@@ -93,6 +93,14 @@ Predictions (DSP: 14 ms., Classification: 0 ms., Anomaly: 1 ms.):
 
 Which matches the values we just saw in the studio. You now have your impulse running on your nRF52840DK Zephyr RTOS enabled development board!
 
+## Troubleshooting
+
+### Invalid choice: 'build'
+
+This error happens when we are trying to build the example project outside of installed `ncs/zephyr` directory and we did not set environment variables.
+To solve this problem we can either move the example project inside `ncs/zephyr/samples` directory and build it from there or we can set required environment variables as seen in Nordic's [documentation][zephyr_env_docs].
+
+If you stumble upon any Zephyr build errors, which 
 [nrf52840dk_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/zephyr/boards/arm/nrf52840dk_nrf52840/doc/index.html
 [ncs_130_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/nrf/index.html
 [zephyr_230_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/zephyr/index.html
@@ -100,3 +108,4 @@ Which matches the values we just saw in the studio. You now have your impulse ru
 [jlink_tools]: https://www.segger.com/downloads/jlink/#J-LinkSoftwareAndDocumentationPack
 [app_gh_download]: https://github.com/edgeimpulse/example-standalone-inferencing-nrf52-zephyr/archive/develop.zip
 [west_flash]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/zephyr/guides/west/build-flash-debug.html#west-flashing
+[zephyr_env_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_installing.html#setting-up-the-command-line-build-environment
