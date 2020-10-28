@@ -25,8 +25,8 @@ set(INCLUDES
 	src
 	tflite-model
 	model-parameters
-	porting
 	edge-impulse-sdk
+	edge-impulse-sdk/porting
 	edge-impulse-sdk/third_party/ruy
 	edge-impulse-sdk/third_party/gemmlowp
 	edge-impulse-sdk/third_party/flatbuffers/include

@@ -21,7 +21,7 @@
  */
 
 #include "tensorflow/lite/micro/debug_log.h"
-#include "../ei_classifier_porting.h"
+#include "ei_classifier_porting.h"
 #include <stdio.h>
 #include <stdarg.h>
 
