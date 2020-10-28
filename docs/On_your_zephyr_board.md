@@ -72,6 +72,12 @@ Connect your board, usually via USB, and turn it on if there’s a power switch.
 $ west flash
 ```
 
+#### Flashing by dragging and dropping a binary into J-Link flash drive.
+Connect your board, usually via USB, and turn it on if there’s a power switch.
+Board will appear on your computer as a normal flash drive with name *J-LINK*.
+Navigate to the `build/zephyr` folder and move created `zephyr.bin` or `zephyr.hex` into J-LINK flash drive.
+Your board will be flashed.
+
 ## Seeing the output
 To see the output of the impulse, connect to the development board over a serial port (provided by the onboard J-LINK) on baud rate 115,200.  
 This will run the signal processing pipeline, and then classify the output:
