@@ -2,29 +2,29 @@
 
 Impulses can be deployed as a C++ library. This packages all your signal processing blocks, configuration and learning blocks up into a single package. You can include this package in your own application to run the impulse locally. In this tutorial you'll export an impulse, and build an application for the nRF52840DK board running Zephyr RTOS to classify sensor data.
 
-> **Knowledge required**  
+> **Knowledge required**
 > This tutorial assumes that you're familiar with building applications for the [nRF52840DK][nrf52840dk_docs] or other **Zephyr RTOS** supported board, and have your environment set up to compile applications for this platform. Currently application is optimized for [NRF Connect SDK v1.3.0][ncs_130_docs] which uses [Zephyr RTOS v2.3.0-rc1][zephyr_230_docs]
 
 ## Prerequisites
 
 Make sure you followed the Continuous motion recognition tutorial, and have a trained impulse. If the build system is not in place you should follow these guides:
 * [install NRF Connect SDK][ncs_install] - this will install Zephyr and all dependencies
-* [install Segger J-Link tools][jlink_tools] for firmware flashing. 
+* [install Segger J-Link tools][jlink_tools] for firmware flashing.
 
 ## Cloning the base repository
 We created an example repository which contains a small application, which takes the raw features as an argument, and prints out the final classification. You can either [download the application][app_gh_download] or import this repository using Git:
 
 ```bash
-git clone https://github.com/edgeimpulse/example-standalone-inferencing-nrf52-zephyr.git
+git clone https://github.com/edgeimpulse/example-standalone-inferencing-zephyr.git
 ```
 
 ## Deploying your impulse
 Head over to your Edge Impulse project, and go to **Deployment**. From here you can create the full library which contains the impulse and all external required libraries. Select **C++ library** and click **Build** to create the library.
 
-Download the `.zip` file and place the contents in the 'example-standalone-inferencing-nrf52-zephyr' folder (which you downloaded above). Your final folder structure should look like this:
+Download the `.zip` file and place the contents in the 'example-standalone-inferencing-zephyr' folder (which you downloaded above). Your final folder structure should look like this:
 
 ```bash
- example-standalone-inferencing-nrf52-zephyr
+ example-standalone-inferencing-zephyr
  ├── CMakeLists.txt
  ├── docs
  ├── edge-impulse-sdk
@@ -59,15 +59,15 @@ static const float features[] = {
     3.9500, 2.0900, 17.2600, 3.2400, 0.7600, 17.6000 ...
 };
 ```
-Then build the application by opening a terminal or command prompt, navigating to the 'example-standalone-inferencing-nrf52-zephyr' folder and run:
+Then build the application by opening a terminal or command prompt, navigating to the 'example-standalone-inferencing-zephyr' folder and run:
 ```bash
 $ west build -b nrf52840dk_nrf52840
 ```
 
 This generates binary files in the build/ directory that can be flashed on the [nRF52840DK][nrf52840dk_docs] using onboard a J-LINK.
 
-#### Flashing using a *west* and J-LINK
-Connect your board, usually via USB, and turn it on if there’s a power switch.Then flash the sample using [west flash][west_flash]:
+#### Flashing using *west* and a J-LINK
+Connect your board, usually via USB, and turn it on if there’s a power switch.Then flash the sample using [west flash](west_flash):
 ```bash
 $ west flash
 ```
@@ -79,12 +79,12 @@ Navigate to the `build/zephyr` folder and move created `zephyr.bin` or `zephyr.h
 Your board will be flashed.
 
 ## Seeing the output
-To see the output of the impulse, connect to the development board over a serial port (provided by the onboard J-LINK) on baud rate 115,200.  
+To see the output of the impulse, connect to the development board over a serial port (provided by the onboard J-LINK) on baud rate 115,200.
 This will run the signal processing pipeline, and then classify the output:
 ```
 *** Booting Zephyr OS build v2.3.0-rc1-ncs1  ***
 Edge Impulse standalone inferencing (Zephyr)
-Features (14 ms.): 1.531785 0.992063 1.732565 1.984127 0.509300 2.976190 0.282135 0.079512 0.308956 0.015747 0.003525 0.997847 2.480159 0.892365 0.992063 0.582132 0.000000 0.000000 0.009061 0.034836 0.020850 0.019193 7.826533 0.992063 9.8 
+Features (14 ms.): 1.531785 0.992063 1.732565 1.984127 0.509300 2.976190 0.282135 0.079512 0.308956 0.015747 0.003525 0.997847 2.480159 0.892365 0.992063 0.582132 0.000000 0.000000 0.009061 0.034836 0.020850 0.019193 7.826533 0.992063 9.8
 Running neural network...
 Predictions (time: 0 ms.):
 idle:   0.000000
@@ -93,7 +93,7 @@ updown: 0.996094
 wave:   0.000000
 Anomaly score (time: 1 ms.): -0.050449
 run_classifier returned: 0
-Predictions (DSP: 14 ms., Classification: 0 ms., Anomaly: 1 ms.): 
+Predictions (DSP: 14 ms., Classification: 0 ms., Anomaly: 1 ms.):
 [0.000000, 0.000000, 0.996094, 0.000000, -0.050449]
 ```
 

@@ -1,7 +1,7 @@
 sample:
-  description: example-standalone-inferencing-nrf52-zephyr sample, the simplest Edge Impulse sample for Zephyr
+  description: example-standalone-inferencing-zephyr, the simplest Edge Impulse example for Zephyr
     application
-  name: example-standalone-inferencing-nrf52-zephyr
+  name: example-standalone-inferencing-zephyr
 common:
     tags: introduction
     harness: console

@@ -5,22 +5,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
-project(example-standalone-inferencing-nrf52-zephyr)
+project(example-standalone-inferencing-zephyr)
 
 include(utils/cmake/utils.cmake)
 # Needed for colorful output
 zephyr_compile_options(-fdiagnostics-color=always)
 
 add_definitions(-DEIDSP_USE_CMSIS_DSP=1
-				-DEIDSP_QUANTIZE_FILTERBANK=1 
-				-DARM_MATH_LOOPUNROLL 
-				-DEIDSP_PRINT_ALLOCATIONS=0 
-				-DEIDSP_TRACK_ALLOCATIONS=0 
+				-DEIDSP_QUANTIZE_FILTERBANK=1
+				-DARM_MATH_LOOPUNROLL
+				-DEIDSP_PRINT_ALLOCATIONS=0
+				-DEIDSP_TRACK_ALLOCATIONS=0
 				-DEIDSP_USE_ASSERTS=1
 				)
 
 # Edge impulse SDK include directories
-set(INCLUDES 
+set(INCLUDES
 	.
 	src
 	tflite-model
@@ -94,4 +94,3 @@ add_subdirectory(porting/zephyr)
 # add all sources to the project
 target_sources(app PRIVATE ${SOURCE_FILES})
 target_sources(app PRIVATE src/main.cpp)
-
