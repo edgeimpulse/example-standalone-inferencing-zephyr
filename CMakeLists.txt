@@ -14,32 +14,32 @@ zephyr_compile_options(-fdiagnostics-color=always)
 # Use hardware acceleration for DSP and Neural Network code
 # You'll need to disable these on non-Arm cores
 add_definitions(-DEIDSP_USE_CMSIS_DSP=1
-			    -DEIDSP_LOAD_CMSIS_DSP_SOURCES=1
-				-DEI_CLASSIFIER_TFLITE_ENABLE_CMSIS_NN=1
-				-DEIDSP_QUANTIZE_FILTERBANK=1
-				-DARM_MATH_LOOPUNROLL
-				)
+                -DEIDSP_LOAD_CMSIS_DSP_SOURCES=1
+                -DEI_CLASSIFIER_TFLITE_ENABLE_CMSIS_NN=1
+                -DEIDSP_QUANTIZE_FILTERBANK=1
+                -DARM_MATH_LOOPUNROLL
+                )
 
 # Edge impulse SDK include directories
 set(INCLUDES
-	.
-	src
-	tflite-model
-	model-parameters
-	edge-impulse-sdk
-	edge-impulse-sdk/third_party/ruy
-	edge-impulse-sdk/third_party/gemmlowp
-	edge-impulse-sdk/third_party/flatbuffers/include
-	edge-impulse-sdk/third_party
-	edge-impulse-sdk/tensorflow
-	edge-impulse-sdk/dsp
-	edge-impulse-sdk/classifier
-	edge-impulse-sdk/anomaly
-	edge-impulse-sdk/CMSIS/NN/Include
-	edge-impulse-sdk/CMSIS/DSP/PrivateInclude
-	edge-impulse-sdk/CMSIS/DSP/Include
-	edge-impulse-sdk/CMSIS/Core/Include
-	)
+    .
+    src
+    tflite-model
+    model-parameters
+    edge-impulse-sdk
+    edge-impulse-sdk/third_party/ruy
+    edge-impulse-sdk/third_party/gemmlowp
+    edge-impulse-sdk/third_party/flatbuffers/include
+    edge-impulse-sdk/third_party
+    edge-impulse-sdk/tensorflow
+    edge-impulse-sdk/dsp
+    edge-impulse-sdk/classifier
+    edge-impulse-sdk/anomaly
+    edge-impulse-sdk/CMSIS/NN/Include
+    edge-impulse-sdk/CMSIS/DSP/PrivateInclude
+    edge-impulse-sdk/CMSIS/DSP/Include
+    edge-impulse-sdk/CMSIS/Core/Include
+    )
 include_directories(${INCLUDES})
 
 RECURSIVE_FIND_FILE(SOURCE_FILES "edge-impulse-sdk" "*.cpp")
