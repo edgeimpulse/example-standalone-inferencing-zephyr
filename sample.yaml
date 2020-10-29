@@ -1,0 +1,14 @@
+sample:
+  description: example-standalone-inferencing-nrf52-zephyr sample, the simplest Edge Impulse sample for Zephyr
+    application
+  name: example-standalone-inferencing-nrf52-zephyr
+common:
+    tags: introduction
+    harness: console
+    harness_config:
+      type: one_line
+      regex:
+        - "Hello World! (.*)"
+tests:
+  sample.basic.helloworld:
+    tags: introduction
