@@ -121,3 +121,10 @@ To solve this problem we can either move the example project inside `ncs/zephyr/
 [app_gh_download]: https://github.com/edgeimpulse/example-standalone-inferencing-nrf52-zephyr/archive/develop.zip
 [west_flash]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.3.0/zephyr/guides/west/build-flash-debug.html#west-flashing
 [zephyr_env_docs]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_installing.html#setting-up-the-command-line-build-environment
+
+### Hmm...
+
+```
+$ source zephyr/zephyr-env.sh
+$ west init && west update
+```

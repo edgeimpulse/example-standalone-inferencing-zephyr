@@ -7,6 +7,6 @@ modules/
 tools/
 zephyr/
 #comment if you want to commit your model
-edge-impulse-sdk/*
+edge-impulse-sdk
 model-parameters/*
 tflite-model/*
