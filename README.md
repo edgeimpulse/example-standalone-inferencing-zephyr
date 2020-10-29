@@ -1,6 +1,6 @@
 # Edge Impulse Example: stand-alone inferencing (Zephyr)
 
-This runs an exported impulse on most Zephyr development boards. See the documentation at [Running your impulse locally (Zephyr)](https://docs.edgeimpulse.com/docs/running-your-impulse-zephyr).
+This runs an exported impulse on most Zephyr development boards. See the documentation at [Running your impulse locally (Zephyr)](https://docs.edgeimpulse.com/docs/running-your-impulse-locally-zephyr).
 
 ## Tested on
 
