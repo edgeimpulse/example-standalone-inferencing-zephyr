@@ -1,6 +1,6 @@
 #include <zephyr.h>
-#include "ei_run_classifier.h"
-#include "numpy.hpp"
+#include "edge-impulse-sdk/classifier/ei_run_classifier.h"
+#include "edge-impulse-sdk/dsp/numpy.hpp"
 
 static const float features[] = {
     // copy raw features here (for example from the 'Live classification' page)
