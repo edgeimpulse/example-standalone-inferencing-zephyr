@@ -12,4 +12,4 @@ This example has been tested on the following Zephyr targets:
 * [nrf9160dk_nrf9160](https://docs.zephyrproject.org/latest/boards/arm/nrf9160dk_nrf9160/doc/index.html)
 * Thingy:91 (`thingy91_nrf9160`)
 
-With nRF Connect SDK 1.6.0 or above, but should run as-is on most Zephyr development boards. If you run this example on a non-Arm development board you'll want to disable the CMSIS-DSP and CMSIS-NN macros in [CMakeLists.txt](CMakeLists.txt).
+With nRF Connect SDK 1.6.0 and above, but should run as-is on most Zephyr development boards. If you run this example on a non-Arm development board you'll want to disable the CMSIS-DSP and CMSIS-NN macros in [CMakeLists.txt](CMakeLists.txt).
