@@ -1,6 +1,7 @@
 #include <zephyr.h>
 #include "edge-impulse-sdk/classifier/ei_run_classifier.h"
 #include "edge-impulse-sdk/dsp/numpy.hpp"
+#include <nrfx_clock.h>
 
 static const float features[] = {
     // copy raw features here (for example from the 'Live classification' page)
@@ -15,6 +16,11 @@ int raw_feature_get_data(size_t offset, size_t length, float *out_ptr) {
 int main() {
     // This is needed so that output of printf is output immediately without buffering
     setvbuf(stdout, NULL, _IONBF, 0);
+
+#ifdef CONFIG_SOC_NRF5340_CPUAPP
+    // Switch CPU core clock to 128 MHz
+    nrfx_clock_divider_set(NRF_CLOCK_DOMAIN_HFCLK, NRF_CLOCK_HFCLK_DIV_1);
+#endif
 
     printk("Edge Impulse standalone inferencing (Zephyr)\n");
 
