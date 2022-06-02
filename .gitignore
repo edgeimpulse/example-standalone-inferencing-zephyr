@@ -10,3 +10,4 @@ zephyr/
 edge-impulse-sdk
 model-parameters/*
 tflite-model/*
+.DS_Store
