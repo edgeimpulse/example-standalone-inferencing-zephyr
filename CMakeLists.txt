@@ -14,8 +14,7 @@ zephyr_compile_options(-fdiagnostics-color=always)
 
 # Use hardware acceleration for DSP and Neural Network code
 # You'll need to disable these on non-Arm cores
-add_definitions(-DEIDSP_USE_CMSIS_DSP=1
-                -DEI_CLASSIFIER_TFLITE_ENABLE_CMSIS_NN=1
+add_definitions(-DEI_CLASSIFIER_TFLITE_ENABLE_CMSIS_NN=1
                 -DARM_MATH_LOOPUNROLL
                 )
 
