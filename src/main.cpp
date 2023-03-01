@@ -5,7 +5,7 @@
 
 static const float features[] = {
     // copy raw features here (for example from the 'Live classification' page)
-    // see https://docs.edgeimpulse.com/docs/running-your-impulse-zephyr
+    // see https://docs.edgeimpulse.com/docs/running-your-impulse-locally-zephyr
 };
 
 int raw_feature_get_data(size_t offset, size_t length, float *out_ptr) {
