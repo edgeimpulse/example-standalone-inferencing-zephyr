@@ -45,25 +45,28 @@ int main() {
         if (res != 0) return 1;
 
         printk("Predictions (DSP: %d ms., Classification: %d ms., Anomaly: %d ms.): \n",
-            result.timing.dsp, result.timing.classification, result.timing.anomaly);
-
-        // print the predictions
-        printk("[");
-        for (size_t ix = 0; ix < EI_CLASSIFIER_LABEL_COUNT; ix++) {
-            ei_printf_float(result.classification[ix].value);
-#if EI_CLASSIFIER_HAS_ANOMALY == 1
-            printk(", ");
-#else
-            if (ix != EI_CLASSIFIER_LABEL_COUNT - 1) {
-                printk(", ");
+                result.timing.dsp, result.timing.classification, result.timing.anomaly);
+#if EI_CLASSIFIER_OBJECT_DETECTION == 1
+        bool bb_found = result.bounding_boxes[0].value > 0;
+        for (size_t ix = 0; ix < result.bounding_boxes_count; ix++) {
+            auto bb = result.bounding_boxes[ix];
+            if (bb.value == 0) {
+                continue;
             }
-#endif
+            printk("    %s (%f) [ x: %u, y: %u, width: %u, height: %u ]\n", bb.label, bb.value, bb.x, bb.y, bb.width, bb.height);
+        }
+        if (!bb_found) {
+            printk("    No objects found\n");
+        }
+#else
+        for (size_t ix = 0; ix < EI_CLASSIFIER_LABEL_COUNT; ix++) {
+            printk("    %s: %.5f\n", result.classification[ix].label,
+                                    result.classification[ix].value);
         }
 #if EI_CLASSIFIER_HAS_ANOMALY == 1
-        ei_printf_float(result.anomaly);
+        printk("    anomaly score: %.3f\n", result.anomaly);
 #endif
-        printk("]\n");
-
+#endif
         k_msleep(2000);
     }
 }
