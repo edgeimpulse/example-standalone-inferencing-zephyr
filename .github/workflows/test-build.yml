@@ -30,7 +30,7 @@ jobs:
     - name: Get EI Build & Deploy action
       uses: actions/checkout@v3
       with:
-        repository: mmajchrzycki/build-deploy
+        repository: edgeimpulse/build-deploy
         ref: main
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         path: ./.github/actions/build-deploy
