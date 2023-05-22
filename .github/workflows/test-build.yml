@@ -9,6 +9,7 @@ on:
 
 jobs:
   build:
+    name: Example Build
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout the rpeository
