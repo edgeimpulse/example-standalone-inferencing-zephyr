@@ -1,11 +1,8 @@
 name: Test Build
 
 on:
-    push:
-        branches:
-            - '**'
-    # schedule:
-    #   - cron: '0 0 * * SUN'
+    schedule:
+      - cron: '25 10 * * MON'
 
 jobs:
   build:
