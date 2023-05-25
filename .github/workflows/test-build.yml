@@ -27,16 +27,8 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
-    - name: Get EI Build & Deploy action
-      uses: actions/checkout@v3
-      with:
-        repository: edgeimpulse/build-deploy
-        ref: main
-        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        path: ./.github/actions/build-deploy
-
     - name: Build and deploy EI Model
-      uses: ./.github/actions/build-deploy
+      uses: edgeimpulse/build-deploy@v1
       id: build-deploy
       with:
         project_id: ${{ secrets.PROJECT_ID }}
