@@ -1,0 +1,47 @@
+name: Test Build
+
+on:
+    schedule:
+      - cron: '25 10 * * MON'
+
+jobs:
+  build:
+    name: Example Build
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout the rpeository
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build the Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        load: true
+        tags: zephyr-ncs-1.9.1:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and deploy EI Model
+      uses: edgeimpulse/build-deploy@v1
+      id: build-deploy
+      with:
+        project_id: ${{ secrets.PROJECT_ID }}
+        api_key: ${{ secrets.API_KEY }}
+
+    - name: Extract the EI Model
+      run: |
+        mkdir ei-model
+        unzip -q "${{ steps.build-deploy.outputs.deployment_file_name }}" -d ei-model
+        mv ei-model/edge-impulse-sdk/ .
+        mv ei-model/model-parameters/ .
+        mv ei-model/tflite-model/ .
+        rm -rf "${{ steps.build-deploy.outputs.deployment_file_name }}"
+        rm -rf ei-model/
+
+    - name: Build test app for nRF52840DK
+      run: |
+        docker run --rm -v $PWD:/app zephyr-ncs-1.9.1:latest west build -b nrf52840dk_nrf52840
