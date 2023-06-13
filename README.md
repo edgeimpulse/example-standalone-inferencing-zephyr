@@ -9,7 +9,7 @@ This example has been tested on the following Zephyr targets:
 
 * [nrf52dk_nrf52832](https://docs.zephyrproject.org/latest/boards/arm/nrf52dk_nrf52832/doc/index.html)
 * [nRF52840dk_nrf52840](https://docs.zephyrproject.org/latest/boards/arm/nrf52840dk_nrf52840/doc/index.html)
-* [nRF5340dk_nrf5340_cpuapp](https://docs.zephyrproject.org/latest/boards/arm/nrf5340dk_nrf5340/doc/index.html)
+* [nrf5340dk_nrf5340_cpuapp](https://docs.zephyrproject.org/latest/boards/arm/nrf5340dk_nrf5340/doc/index.html)
 * [nrf9160dk_nrf9160](https://docs.zephyrproject.org/latest/boards/arm/nrf9160dk_nrf9160/doc/index.html)
 
 You can also run the example with Nordic nRF Connect SDK and the following boards:
