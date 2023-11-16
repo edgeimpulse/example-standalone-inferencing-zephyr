@@ -1,4 +1,9 @@
+// Zpehyr 3.1.x and newer uses different include scheme
+#if (KERNEL_VERSION_MAJOR > 3) || ((KERNEL_VERSION_MAJOR == 3) && (KERNEL_VERSION_MINOR >= 1))
+#include <zephyr/kernel.h>
+#else
 #include <zephyr.h>
+#endif
 #include "edge-impulse-sdk/classifier/ei_run_classifier.h"
 #include "edge-impulse-sdk/dsp/numpy.hpp"
 #include <nrfx_clock.h>
