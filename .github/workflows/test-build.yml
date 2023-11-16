@@ -1,8 +1,8 @@
 name: Test Build
 
 on:
-    schedule:
-      - cron: '25 10 * * MON'
+  schedule:
+    - cron: '25 10 * * MON'
 
 jobs:
   build:
