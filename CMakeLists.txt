@@ -36,8 +36,3 @@ list(APPEND SOURCE_FILES ${MODEL_FILES})
 # add all sources to the project
 target_sources(app PRIVATE ${SOURCE_FILES})
 target_sources(app PRIVATE src/main.cpp)
-
-# Preinitialization related to Thingy:53 DFU
-target_sources_ifdef(CONFIG_BOARD_THINGY53_NRF5340_CPUAPP app PRIVATE
-    boards/thingy53.c
-)
