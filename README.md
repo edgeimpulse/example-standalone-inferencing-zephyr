@@ -6,7 +6,7 @@ This runs an exported impulse on most Zephyr development boards. See the documen
 ## Tested on
 
 This example has been tested on the following Zephyr targets:
-
+* [apollo4p_blue_kxr_evb](https://docs.zephyrproject.org/latest/boards/ambiq/apollo4p_blue_kxr_evb/doc/index.html)
 * [nrf52dk_nrf52832](https://docs.zephyrproject.org/latest/boards/nordic/nrf52dk/doc/index.html)
 * [nrf52840dk_nrf52840](https://docs.zephyrproject.org/latest/boards/nordic/nrf52840dk/doc/index.html)
 * [nrf5340dk_nrf5340_cpuapp](https://docs.zephyrproject.org/latest/boards/nordic/nrf5340dk/doc/index.html)

@@ -25,7 +25,7 @@ int main() {
     // This is needed so that output of printf is output immediately without buffering
     setvbuf(stdout, NULL, _IONBF, 0);
 
-#ifdef CONFIG_SOC_NRF5340_CPUAPP // this cones from Zephyr
+#ifdef CONFIG_SOC_NRF5340_CPUAPP // this comes from Zephyr
     // Switch CPU core clock to 128 MHz
     nrfx_clock_divider_set(NRF_CLOCK_DOMAIN_HFCLK, NRF_CLOCK_HFCLK_DIV_1);
 #endif
