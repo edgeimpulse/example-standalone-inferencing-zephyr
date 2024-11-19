@@ -18,6 +18,9 @@ add_definitions(-DEI_CLASSIFIER_TFLITE_ENABLE_CMSIS_NN=1
                 -DARM_MATH_LOOPUNROLL
                 )
 
+# If using Nordic boards, add the following definition
+# -DEI_NORDIC
+
 # Add the Edge Impulse SDK
 add_subdirectory(edge-impulse-sdk/cmake/zephyr)
 

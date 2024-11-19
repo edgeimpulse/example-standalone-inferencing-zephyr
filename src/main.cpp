@@ -1,4 +1,4 @@
-// Zpehyr 3.1.x and newer uses different include scheme
+// Zephyr 3.1.x and newer uses different include scheme
 #include <version.h>
 #if (KERNEL_VERSION_MAJOR > 3) || ((KERNEL_VERSION_MAJOR == 3) && (KERNEL_VERSION_MINOR >= 1))
 #include <zephyr/kernel.h>
@@ -7,7 +7,9 @@
 #endif
 #include "edge-impulse-sdk/classifier/ei_run_classifier.h"
 #include "edge-impulse-sdk/dsp/numpy.hpp"
+#ifdef EI_NORDIC
 #include <nrfx_clock.h>
+#endif
 
 static const float features[] = {
     // copy raw features here (for example from the 'Live classification' page)
@@ -23,7 +25,7 @@ int main() {
     // This is needed so that output of printf is output immediately without buffering
     setvbuf(stdout, NULL, _IONBF, 0);
 
-#ifdef CONFIG_SOC_NRF5340_CPUAPP
+#ifdef CONFIG_SOC_NRF5340_CPUAPP // this comes from Zephyr
     // Switch CPU core clock to 128 MHz
     nrfx_clock_divider_set(NRF_CLOCK_DOMAIN_HFCLK, NRF_CLOCK_HFCLK_DIV_1);
 #endif
@@ -45,7 +47,7 @@ int main() {
         features_signal.get_data = &raw_feature_get_data;
 
         // invoke the impulse
-        EI_IMPULSE_ERROR res = run_classifier(&features_signal, &result, true);
+        EI_IMPULSE_ERROR res = run_classifier(&features_signal, &result, false);
         printk("run_classifier returned: %d\n", res);
 
         if (res != 0) return 1;
