@@ -15,7 +15,11 @@ zephyr_compile_options(-fdiagnostics-color=always)
 # Use hardware acceleration for DSP and Neural Network code
 # You'll need to disable these on non-Arm cores
 add_definitions(-DEI_CLASSIFIER_TFLITE_ENABLE_CMSIS_NN=1
+                -DEIDSP_USE_CMSIS_DSP
+                -DEIDSP_LOAD_CMSIS_DSP_SOURCES
                 -DARM_MATH_LOOPUNROLL
+                -DEI_PORTING_ZEPHYR=1
+                -DEI_CLASSIFIER_HR_LIB=1
                 )
 
 # If using Nordic boards, add the following definition
@@ -39,3 +43,10 @@ list(APPEND SOURCE_FILES ${MODEL_FILES})
 # add all sources to the project
 target_sources(app PRIVATE ${SOURCE_FILES})
 target_sources(app PRIVATE src/main.cpp)
+
+add_library(ei_hr_lib STATIC IMPORTED GLOBAL)
+set_target_properties(ei_hr_lib PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/hr/lib/libhr.a)
+
+target_link_libraries(ei_hr_lib INTERFACE app)
+# Link the library in the main app
+target_link_libraries(app PRIVATE ei_hr_lib)
