@@ -1,6 +1,15 @@
-#include <stdio.h>
-
+// Zephyr 3.1.x and newer uses different include scheme
+#include <version.h>
+#if (KERNEL_VERSION_MAJOR > 3) || ((KERNEL_VERSION_MAJOR == 3) && (KERNEL_VERSION_MINOR >= 1))
+#include <zephyr/kernel.h>
+#else
+#include <zephyr.h>
+#endif
 #include "edge-impulse-sdk/classifier/ei_run_classifier.h"
+#include "edge-impulse-sdk/dsp/numpy.hpp"
+#ifdef EI_NORDIC
+#include <nrfx_clock.h>
+#endif
 
 // Callback function declaration
 static int get_signal_data(size_t offset, size_t length, float *out_ptr);
@@ -28,50 +37,54 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    // Assign callback function to fill buffer used for preprocessing/inference
-    signal.total_length = EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE;
-    signal.get_data = &get_signal_data;
+    while(1) {
+        // Assign callback function to fill buffer used for preprocessing/inference
+        signal.total_length = EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE;
+        signal.get_data = &get_signal_data;
 
-    // Perform DSP pre-processing and inference
-    res = run_classifier(&signal, &result, false);
+        // Perform DSP pre-processing and inference
+        res = run_classifier(&signal, &result, true);
 
-    // Print return code and how long it took to perform inference
-    ei_printf("run_classifier returned: %d\r\n", res);
-    ei_printf("Timing: DSP %d ms, inference %d ms, anomaly %d ms\r\n",
-            result.timing.dsp,
-            result.timing.classification,
-            result.timing.anomaly);
+        // Print return code and how long it took to perform inference
+        ei_printf("run_classifier returned: %d\r\n", res);
+        ei_printf("Timing: DSP %d ms, inference %d ms, anomaly %d ms\r\n",
+                result.timing.dsp,
+                result.timing.classification,
+                result.timing.anomaly);
 
-    // Print the prediction results (object detection)
-#if EI_CLASSIFIER_OBJECT_DETECTION == 1
-    ei_printf("Object detection bounding boxes:\r\n");
-    for (uint32_t i = 0; i < EI_CLASSIFIER_OBJECT_DETECTION_COUNT; i++) {
-        ei_impulse_result_bounding_box_t bb = result.bounding_boxes[i];
-        if (bb.value == 0) {
-            continue;
+        // Print the prediction results (object detection)
+    #if EI_CLASSIFIER_OBJECT_DETECTION == 1
+        ei_printf("Object detection bounding boxes:\r\n");
+        for (uint32_t i = 0; i < EI_CLASSIFIER_OBJECT_DETECTION_COUNT; i++) {
+            ei_impulse_result_bounding_box_t bb = result.bounding_boxes[i];
+            if (bb.value == 0) {
+                continue;
+            }
+            ei_printf("  %s (%f) [ x: %u, y: %u, width: %u, height: %u ]\r\n",
+                    bb.label,
+                    bb.value,
+                    bb.x,
+                    bb.y,
+                    bb.width,
+                    bb.height);
         }
-        ei_printf("  %s (%f) [ x: %u, y: %u, width: %u, height: %u ]\r\n",
-                bb.label,
-                bb.value,
-                bb.x,
-                bb.y,
-                bb.width,
-                bb.height);
-    }
 
-    // Print the prediction results (classification)
-#else
-    ei_printf("Predictions:\r\n");
-    for (uint16_t i = 0; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
-        ei_printf("  %s: ", ei_classifier_inferencing_categories[i]);
-        ei_printf("%.5f\r\n", result.classification[i].value);
-    }
-#endif
+        // Print the prediction results (classification)
+    #else
+        ei_printf("Predictions:\r\n");
+        for (uint16_t i = 0; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
+            ei_printf("  %s: ", ei_classifier_inferencing_categories[i]);
+            ei_printf("%.5f\r\n", result.classification[i].value);
+        }
+    #endif
 
-    // Print anomaly result (if it exists)
-#if EI_CLASSIFIER_HAS_ANOMALY == 1
-    ei_printf("Anomaly prediction: %.3f\r\n", result.anomaly);
-#endif
+        // Print anomaly result (if it exists)
+    #if EI_CLASSIFIER_HAS_ANOMALY == 1
+        ei_printf("Anomaly prediction: %.3f\r\n", result.anomaly);
+    #endif
+
+        k_msleep(2000);
+    }
 
     return 0;
 }
