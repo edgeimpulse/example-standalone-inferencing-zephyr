@@ -16,7 +16,6 @@ static int get_signal_data(size_t offset, size_t length, float *out_ptr);
 
 // Raw features copied from test sample
 static const float features[EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE] = {
-
 };
 
 int main(int argc, char **argv) {

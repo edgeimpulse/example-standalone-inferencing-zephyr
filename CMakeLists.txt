@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 3.13.1)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE MinSizeRel)
+endif()
+
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
 project(example-standalone-inferencing-zephyr)
@@ -10,7 +14,8 @@ project(example-standalone-inferencing-zephyr)
 include(utils/cmake/utils.cmake)
 
 # Needed for colorful output
-zephyr_compile_options(-fdiagnostics-color=always)
+zephyr_compile_options(-fdiagnostics-color=always -mcpu=cortex-m33 -mthumb -mabi=aapcs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mfp16-format=ieee --specs=nosys.specs -fno-exceptions -ffreestanding -fno-common -ffunction-sections -fdata-sections -specs=nano.specs -fno-asynchronous-unwind-tables -fno-pie -fno-pic -fno-strict-overflow -fno-reorder-functions -fno-defer-pop)
+zephyr_ld_options(-Wl,--gc-sections)
 
 # Use hardware acceleration for DSP and Neural Network code
 # You'll need to disable these on non-Arm cores
@@ -20,6 +25,7 @@ add_definitions(-DEI_CLASSIFIER_TFLITE_ENABLE_CMSIS_NN=1
                 -DARM_MATH_LOOPUNROLL
                 -DEI_PORTING_ZEPHYR=1
                 -DEI_CLASSIFIER_HR_LIB=1
+                -DEI_NORDIC
                 )
 
 # If using Nordic boards, add the following definition
