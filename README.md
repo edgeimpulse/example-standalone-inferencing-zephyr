@@ -6,13 +6,14 @@ This runs an exported impulse on most Zephyr development boards. See the documen
 ## Tested on
 
 This example has been tested on the following Zephyr targets:
-* [apollo4p_blue_kxr_evb](https://docs.zephyrproject.org/latest/boards/ambiq/apollo4p_blue_kxr_evb/doc/index.html)
 * [nrf52dk_nrf52832](https://docs.zephyrproject.org/latest/boards/nordic/nrf52dk/doc/index.html)
 * [nrf52840dk_nrf52840](https://docs.zephyrproject.org/latest/boards/nordic/nrf52840dk/doc/index.html)
 * [nrf5340dk_nrf5340_cpuapp](https://docs.zephyrproject.org/latest/boards/nordic/nrf5340dk/doc/index.html)
 * [nrf9160dk_nrf9160](https://docs.zephyrproject.org/latest/boards/nordic/nrf9160dk/doc/index.html)
 * [nrf54l15dk/nrf54l15/cpuapp](https://docs.zephyrproject.org/latest/boards/nordic/nrf54l15dk/doc/index.html)
-  * NCS 3.0.0: `west build -b nrf54l15dk/nrf54l15/cpuapp`
+  * NCS 3.0.0 (mandatory)
+* [apollo4p_blue_kxr_evb](https://docs.zephyrproject.org/latest/boards/ambiq/apollo4p_blue_kxr_evb/doc/index.html)
+  * not suted for builds with included `./Dockerfile`
 
 You can also run the example with Nordic nRF Connect SDK and the following boards:
 * [thingy91_nrf9160_ns](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/working_with_nrf/nrf91/thingy91.html#building-and-programming-from-the-source-code)
